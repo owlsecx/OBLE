@@ -18,24 +18,18 @@
 
 ## 📌 Overview
 
-Read-only Bluetooth / BLE security auditor & risk grader
+OBLE is a strictly read-only, defensive Bluetooth and BLE security auditor that never pairs, connects, injects or attacks any device. It enumerates local adapters and stack configuration, parses passive discovery output you captured yourself, and decodes Class-of-Device, OUI vendor and BLE address-type information offline. A built-in knowledge base of SIG services, LMP versions and vulnerability classes drives a weighted A+…F risk grade with MITRE ATT&CK tags.
 
 ---
 
 ## ✨ Features
 
-- Local adapter enumeration — hciconfig -a, bluetoothctl show, /sys/class/bluetooth, rfkill, BlueZ main.conf (read-only, timeouts, graceful "not available")
-- Passive discovery — bluetoothctl devices/scan/info, hcitool scan/lescan/inq, btmgmt find (tolerant parsers)
-- Paste / load captured scan output for offline review
-- Class-of-Device decoder (major / minor / service bits)
-- Built-in OUI vendor table (250+ prefixes)
+- Read-only local adapter/stack enumeration (hciconfig, bluetoothctl, rfkill, BlueZ)
+- Tolerant parsers for bluetoothctl, hcitool and btmgmt discovery output
+- Class-of-Device decoder and 250+ entry OUI vendor table
 - BLE address-type analysis (public / static / RPA / NRPA)
-- Knowledge base — SIG GATT services & characteristics, company identifiers, LMP versions, vulnerability classes (BlueBorne, KNOB, BIAS, SweynTooth, BleedingTooth, ...)
-- Security assessment of devices and the local stack
-- Weighted A+…F risk grade, MITRE ATT&CK tags, remediation
-- Export TXT / Markdown / JSON / CSV / SARIF 2.1.0
-- Full CLI mode with CI gates (--min-severity, --fail-on)
-- --demo self-test with synthetic captured scan output
+- Knowledge base of GATT services, LMP versions and vuln classes (BlueBorne, KNOB, BIAS…)
+- Weighted A+…F risk grade, MITRE ATT&CK tags and export TXT/MD/JSON/CSV/SARIF
 
 ---
 
@@ -49,7 +43,10 @@ Read-only Bluetooth / BLE security auditor & risk grader
 ## 🚀 Usage
 
 ```bash
-./OBLE
+./OBLE --adapters
+./OBLE --scan 20
+./OBLE --parse scan_output.txt --format json -o report.json
+./OBLE --help
 ```
 
 ---
